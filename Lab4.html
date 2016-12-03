@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <title>Lab4</title>
+    <style>
+        body {
+            background-color: #f3f3f3;
+        }
+        .code {
+            font-family: 'Source Code Pro', monospace;
+            font-size: small;
+        }
+        .answer {
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main_div" ng-controller='myCtrl1'>
+        <h1>Лабараторная работа 4</h1>
+        <h2>Функция каррирования</h2>
+
+        <p class="code">
+            function curry(a) {
+            <br> return function (b) {
+            <br> // в этом вызове аргумент a заменён на
+            <br> // переданное в функцию curry значение;
+            <br> };}
+            <br> var par=foo(Множитель1)
+            <br> console.log(par(Множитель2));
+            <br>
+        </p>
+        Множитель1 * Множитель2 = Результат
+        <br>
+        <input type="text" size="8" id="x"> *
+        <input type="text" size="8" id="y"> =
+        <input type="text" size="5" id="res1" style="background-color: #fafafa; text-align:center;" readonly>
+        <br>
+        <input type="button" value="Умножение" onclick="fun1()" style="margin-left:55px; margin-top:7px; margin-bottom:7px;text-align: center;">
+        <br>
+        <h2>Числа Фибоначчи (с рекурсией)</h2>
+        <p class="code">
+            function fibonacciRec(n) {
+            <br> if (n === 0 || n === 1) return n;
+            <br> else return fibonacci(n - 1) + fibonacci(n - 2);
+            <br> }
+            <br>
+        </p>
+        Результат:
+        <input type="text" size="15" id="res2" style="background-color: #fafafa; text-align:center;" readonly>
+        <h2>Числа Фибоначчи (с мемоизацией)</h2>
+        <p class="code">function fibonacciMem (n){
+            <br> var mass = [];
+            <br> mass.push(1,1);
+            <br> for(var i =2 ; i
+            < n ; i++){<br>
+                mass[i]= mass[i-1]+mass[i-2];
+                <br> }
+                <br> console.log(mass[n-1]);
+                <br> return function(x){
+                <br> return mass[x];
+                <br> }}
+                <br>
+        </p>
+        <br> Число => Результат:
+        <br>
+        <input type="text" size="2" id="f"> =>
+        <input type="text" size="15" id="res3" style="background-color: #fafafa; text-align:center;" readonly>
+        <br>
+        <input type="button" value="Факториал" onclick="funс()" style="margin-left:20px; margin-top: 10px; text-align: center;">
+        </p>
+    </div>
+</body>
+
+<script type="text/javascript">
+    /******************************Каррирование*********************************/
+    function curry(a) {
+        return function(b) {
+            return a * b;
+        };
+    }
+
+    function fun1() {
+        var x = document.getElementById('x').value,
+            y = document.getElementById('y').value;
+        var inc = curry(x),
+            res = inc(y);
+        document.getElementById('res1').value = res;
+        console.log(res);
+    }
+
+    /***************************Вычесление Факториала с рекурсией************************************/
+    function fibonacci(n) {
+        if (n === 0 || n === 1) return n;
+        else
+            return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    function fibonacciRec(n) {
+        var mass = [];
+        for (var i = 1; i <= n; i++) {
+            mass.push(fibonacci(i));
+        }
+        return mass;
+    }
+
+    function fun2() {
+        var n = document.getElementById('f').value;
+        var res = fibonacciRec(n);
+        document.getElementById('res2').value = res;
+        console.log(res);
+    }
+
+    /*****************************Вычесление Факториала с мемоизацией**********************************/
+
+    function fibonacciMem(n) {
+        var mass = [];
+        mass.push(1, 1);
+        for (var i = 2; i < n; i++) {
+            mass[i] = mass[i - 1] + mass[i - 2];
+        }
+        return mass;
+    }
+
+    function fun3() {
+        var n = document.getElementById('f').value;
+        var res = fibonacciMem(n);
+        document.getElementById('res3').value = res;
+        console.log(res);
+    }
+
+    function funс() {
+        var res = fun2(),
+            yes = fun3();
+    }
+</script>
+
+</html>
